@@ -164,3 +164,9 @@ All code modifications must be logged here **before** being merged. Each entry s
 - Reference to the commit or PR
 
 The latest entry should appear at the top of this section.
+
+- *2026-10-03*: Created `vercel.json` to explicitly configure the Vercel Build Framework to Vite and output directory to `dist`, overriding cached framework detection. Fixed Vite 8 native configuration warning by replacing `__dirname` with `import.meta.dirname` in `vite.config.js`.
+  - Files affected: `vercel.json`, `vite.config.js`.
+
+- *2026-10-03*: Uninstalled unused dependencies (including `nitro` which was causing Vercel deployment issues) and ran ESLint to automatically remove unused imports across the codebase.
+  - Files affected: `package.json`, `package-lock.json`, various source files (auto-fixed).

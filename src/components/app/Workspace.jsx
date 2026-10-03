@@ -47,7 +47,7 @@ export default function Workspace() {
   useEffect(() => { document.title = `${label} — Glimpse`; }, [label]);
   useEffect(() => {
     if (section === 'create') getDraft().then((d) => d && setDraftPrompt(true)).catch(reportError);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);  
 
   const openSection = async (id) => {
     if (id === 'create' && section === 'create') {
