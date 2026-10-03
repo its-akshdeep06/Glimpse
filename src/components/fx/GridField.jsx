@@ -35,7 +35,7 @@ export default function GridField({ className = '', cell = 36 }) {
           if (d <= 2.2) heat[cy * cols + cx] = Math.max(heat[cy * cols + cx], 1 - d / 2.6);
         }
       }
-      if (heat.length && Math.random() < 0.3) heat[Math.floor(Math.random() * heat.length)] = 0.45;
+
       const inset = cell * 0.2;
       for (let i = 0; i < heat.length; i++) {
         const v = heat[i];
