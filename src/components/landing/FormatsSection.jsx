@@ -5,7 +5,7 @@ import { buildSVGString, generateMatrix, svgDataUrl } from '@/services/qrService
 import { defaultCustomization } from '@/hooks/useQRProject';
 
 const FORMATS = [
-  { n: '01', name: 'URL', line: 'Links that open instantly', detail: 'Validated addresses — https:// is added if you forget.', sample: 'https://example.com' },
+  { n: '01', name: 'URL', line: 'Links that open instantly', detail: 'Validated addresses — https:// is added if you forget.', sample: 'https://glimpse01.vercel.app/' },
   { n: '02', name: 'Plain Text', line: 'Notes, codes, anything', detail: 'Up to 1,500 characters of raw text.', sample: 'Hello from Glimpse' },
   { n: '03', name: 'Email', line: 'A message, pre-written', detail: 'Recipient, subject and body in one scan.', sample: 'mailto:hello@example.com' },
   { n: '04', name: 'Phone', line: 'Tap to call', detail: 'International numbers with a leading +.', sample: 'tel:+15550100' },
@@ -20,8 +20,8 @@ export default function FormatsSection() {
   ))), []);
 
   return (
-    <section id="formats" className="border-b border-carbon py-28 md:py-40">
-      <div className="mx-auto max-w-[1600px] px-6 md:px-10">
+    <section id="formats" className="relative border-b border-carbon py-28 md:py-40">
+      <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-10">
         <div className="grid gap-8 md:grid-cols-2 md:items-end">
           <Reveal>
             <p className="label-caps text-volt-text">01 — Formats</p>
@@ -43,7 +43,7 @@ export default function FormatsSection() {
               transition={{ duration: 0.8, delay: i * 0.06, ease: [0.2, 0.9, 0.1, 1] }}
               className="group relative overflow-hidden border-b border-carbon"
             >
-              <span className="absolute inset-0 origin-bottom scale-y-0 bg-volt transition-transform duration-500 ease-[cubic-bezier(.2,.9,.1,1)] group-hover:scale-y-100" />
+              <span className="absolute inset-0 origin-bottom scale-y-0 bg-volt transition-transform duration-500 ease-&lsqb;cubic-bezier(.2,.9,.1,1)&rsqb; group-hover:scale-y-100" />
               <div className="relative grid grid-cols-[auto_1fr] items-center gap-x-6 gap-y-3 py-8 transition-colors duration-500 group-hover:text-on-volt md:grid-cols-[80px_1fr_1fr_110px] md:gap-10 md:py-10">
                 <span className="label-caps text-mute group-hover:text-on-volt">{f.n}</span>
                 <h3 className="font-wide text-[clamp(1.75rem,4vw,3.5rem)] font-black uppercase leading-none tracking-tight transition-transform duration-500 group-hover:translate-x-3">{f.name}</h3>

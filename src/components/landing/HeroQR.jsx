@@ -7,8 +7,8 @@ import { generateMatrix } from '@/services/qrService';
 import { TEMPLATES, applyTemplateTo } from '@/lib/templates';
 import { defaultCustomization } from '@/hooks/useQRProject';
 
-export default function HeroQR() {
-  const matrix = useMemo(() => generateMatrix('https://module.studio/encode-anything', 'Q'), []);
+function HeroQR() {
+  const matrix = useMemo(() => generateMatrix('https://glimpse01.vercel.app/', 'Q'), []);
   const [i, setI] = useState(1);
 
   useEffect(() => {
@@ -46,3 +46,4 @@ export default function HeroQR() {
     </motion.div>
   );
 }
+export default HeroQR;

@@ -19,7 +19,7 @@ const PALETTES = [
 const STYLES = ['square', 'rounded', 'dot'];
 
 export default function DesignSection() {
-  const matrix = useMemo(() => generateMatrix('https://module.studio/design-lab', 'Q'), []);
+  const matrix = useMemo(() => generateMatrix('https://glimpse01.vercel.app/', 'Q'), []);
   const [p, setP] = useState(1);
   const [style, setStyle] = useState('rounded');
   const [grad, setGrad] = useState(true);
@@ -29,7 +29,7 @@ export default function DesignSection() {
 
   return (
     <section id="design" className="relative border-b border-carbon py-28 md:py-40">
-      <div className="mx-auto grid max-w-[1600px] items-center gap-16 px-6 md:px-10 lg:grid-cols-2">
+      <div className="relative z-10 mx-auto grid max-w-[1600px] items-center gap-16 px-6 md:px-10 lg:grid-cols-2">
         <div>
           <Reveal>
             <p className="label-caps text-volt-text">02 — Design</p>

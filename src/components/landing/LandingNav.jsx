@@ -1,16 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Moon, Sun } from 'lucide-react';
 import LogoMark from '@/components/brand/LogoMark';
 import Magnetic from '@/components/fx/Magnetic';
+import { getSettings, updateSettings } from '@/services/storageService';
 
 const LINKS = [['Formats', '#formats'], ['Design', '#design'], ['Gallery', '#gallery'], ['Privacy', '#privacy']];
 
 export default function LandingNav() {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
+  const [theme, setTheme] = useState(getSettings().theme);
+  
   useMotionValueEvent(scrollY, 'change', (v) => setHidden(v > (scrollY.getPrevious() ?? 0) && v > 240));
+
+  useEffect(() => {
+    const handle = () => setTheme(getSettings().theme);
+    window.addEventListener('module:settings', handle);
+    return () => window.removeEventListener('module:settings', handle);
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    updateSettings({ theme: next });
+  };
 
   return (
     <motion.header
@@ -28,12 +42,24 @@ export default function LandingNav() {
             <a key={label} href={href} className="label-caps text-mute transition-colors hover:text-ink">{label}</a>
           ))}
         </nav>
-        <Magnetic>
-          <Link to="/app" className="group flex items-center gap-2 rounded-full border border-carbon bg-void/60 px-5 py-2.5 label-caps backdrop-blur transition-colors hover:border-volt hover:bg-volt hover:text-on-volt">
-            Open atelier
-            <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
-          </Link>
-        </Magnetic>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={toggleTheme}
+            className="group flex items-center gap-2 rounded-full border border-transparent px-4 py-2 label-caps text-mute transition-colors hover:bg-carbon hover:text-ink"
+            title="Toggle dark mode"
+          >
+            {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4 text-volt" />}
+            <span className="hidden sm:inline">
+              {theme === 'dark' ? 'Light Mode' : 'Try Dark Mode!'}
+            </span>
+          </button>
+          <Magnetic>
+            <Link to="/app" className="group flex items-center gap-2 rounded-full border border-carbon bg-void/60 px-5 py-2.5 label-caps backdrop-blur transition-colors hover:border-volt hover:bg-volt hover:text-on-volt">
+              Open Glimpse
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
+            </Link>
+          </Magnetic>
+        </div>
       </div>
     </motion.header>
   );

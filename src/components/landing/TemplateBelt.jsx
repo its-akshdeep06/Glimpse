@@ -10,13 +10,13 @@ import { defaultCustomization } from '@/hooks/useQRProject';
 
 export default function TemplateBelt() {
   const items = useMemo(() => {
-    const m = generateMatrix('https://module.studio/gallery', 'Q');
+    const m = generateMatrix('https://glimpse01.vercel.app/', 'Q');
     return TEMPLATES.map((t) => ({ ...t, src: svgDataUrl(buildSVGString(m, applyTemplateTo(defaultCustomization(), t), 520)) }));
   }, []);
 
   return (
-    <section id="gallery" className="border-b border-carbon py-28 md:py-40">
-      <div className="mx-auto flex max-w-[1600px] flex-col gap-6 px-6 md:flex-row md:items-end md:justify-between md:px-10">
+    <section id="gallery" className="relative border-b border-carbon py-28 md:py-40">
+      <div className="relative z-10 mx-auto flex max-w-[1600px] flex-col gap-6 px-6 md:flex-row md:items-end md:justify-between md:px-10">
         <Reveal>
           <p className="label-caps text-volt-text">03 — Gallery</p>
           <h2 className="mt-6 font-wide text-[clamp(2.4rem,5.5vw,5.5rem)] font-black uppercase leading-[0.95] tracking-tight">

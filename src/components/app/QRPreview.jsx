@@ -14,9 +14,9 @@ export default function QRPreview({ project, matrix, error, risks, dirty, isFavo
   const assembleKey = `${project.encoded}|${c.errorCorrection}|${c.templateId}|${c.moduleStyle}`;
 
   return (
-    <div className="relative flex min-h-[70svh] flex-col p-5 md:p-10 lg:min-h-[calc(100svh-4rem)]">
+    <div className="relative flex min-h-[70svh] flex-col p-4 md:p-6 lg:h-full lg:min-h-0">
       <div className="pointer-events-none absolute inset-0 grid-lines opacity-70 [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_72%)]" />
-      <div className="relative flex items-start justify-between gap-4">
+      <div className="relative flex shrink-0 items-start justify-between gap-4">
         <div className="min-w-0">
           <p className="label-caps text-mute">02 — Preview</p>
           <p className="mt-2 truncate font-wide text-xl font-bold">{project.name || 'Untitled'}</p>
@@ -34,13 +34,13 @@ export default function QRPreview({ project, matrix, error, risks, dirty, isFavo
           </div>
         )}
       </div>
-      <div className="relative flex flex-1 items-center justify-center py-10">
+      <div className="relative flex min-h-0 flex-1 items-center justify-center py-3">
         {matrix && <PreviewStage matrix={matrix} customization={c} assembleKey={assembleKey} />}
         {!matrix && error && <p className="max-w-sm text-center text-[#FF6B5B]">{error} Try a lower error-correction level or shorter content.</p>}
         {!matrix && !error && <EmptyCanvas />}
       </div>
       {matrix && (
-        <div className="relative mx-auto w-full max-w-3xl space-y-5">
+        <div className="relative mx-auto w-full max-w-3xl shrink-0 space-y-3">
           <p className="text-center font-mono text-[11px] uppercase tracking-[0.1em] text-steel">
             {c.size} × {c.size} px · EC {c.errorCorrection} · v{version} · {typeLabel}
           </p>

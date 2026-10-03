@@ -2,27 +2,20 @@ import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { Image } from '@/components/ui/image';
 import GridField from '@/components/fx/GridField';
 import SplitText from '@/components/fx/SplitText';
 import Magnetic from '@/components/fx/Magnetic';
 import HeroQR from '@/components/landing/HeroQR';
 import HeroReadout from '@/components/landing/HeroReadout';
 
-const PRISM = 'https://media.base44.com/images/public/6aba836498fb6f1d61ad6917/3fbedfd49_generated_43f53d6f.jpg';
-
 export default function Hero() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '25%']);
   const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
     <section ref={ref} className="relative min-h-[100svh] overflow-hidden border-b border-carbon">
       <GridField className="absolute inset-0 h-full w-full" />
-      <motion.div style={{ y }} className="pointer-events-none absolute right-0 top-0 h-full w-full opacity-30 [mask-image:linear-gradient(to_left,black_25%,transparent_85%)] md:w-[62%]">
-        <Image src={PRISM} alt="" className="h-full w-full" />
-      </motion.div>
       <motion.div style={{ opacity: fade }} className="relative z-10 mx-auto grid min-h-[100svh] max-w-[1600px] grid-cols-1 items-center gap-16 px-6 pb-28 pt-32 md:px-10 lg:grid-cols-[1.3fr_1fr]">
         <div>
           <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.8 }} className="flex items-center gap-3 label-caps text-mute">

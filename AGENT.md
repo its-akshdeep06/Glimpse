@@ -165,6 +165,43 @@ All code modifications must be logged here **before** being merged. Each entry s
 
 The latest entry should appear at the top of this section.
 
+- *2026-10-04*: **Orientation fix for Create QR workspace**: 
+  - Fixed the aside sidebar width — replaced invalid CSS grid `minmax()` syntax with a proper fixed flex width (`lg:w-[420px] lg:shrink-0`).
+  - Updated `PreviewStage` to use `aspect-square h-full max-h-[500px]` so the QR code scales proportionally within the available viewport height instead of overflowing.
+  - Files affected: `src/components/app/CreateSection.jsx`, `src/components/app/PreviewStage.jsx`.
+
+- *2026-10-03*: **UI/UX Refinements in Editor**: 
+  - Reverted the default URL string for new projects back to an empty string `''` (it was previously pre-filled).
+  - Locked the `CreateSection` desktop layout to strictly fit within the viewport height (`100svh-4rem`).
+  - Adjusted flex-box shrink constraints in `QRPreview` so the preview stage dynamically scales to fit within the viewport without triggering window scrolling. Only the sidebars (QR Form and Customizer/Template Selector) are now allowed to scroll independently.
+  - Files affected: `src/utils/validation.js`, `src/components/app/CreateSection.jsx`, `src/components/app/QRPreview.jsx`.
+
+- *2026-10-03*: **Major Performance Optimization**. Addressed lag on the landing page caused by heavy blur filters and excessive re-renders:
+  - Removed individual `BlueGlow` components from each section, which were creating 12 simultaneous heavy blurred layers.
+  - Wrapped the lower sections in `LandingPage.jsx` within a single relative container hosting a single `BlueGlow` instance.
+  - Replaced the extremely heavy CSS `blur-[100px]` filters in `BlueGlow` with highly performant native CSS radial gradients (`bg-[radial-gradient(...)]`).
+  - Added `willChange: 'transform, opacity'` to the animated orbs to offload compositing to the GPU.
+  - Ran linter to clean up unused `BlueGlow` imports across section components.
+  - Files affected: `src/pages/LandingPage.jsx`, `src/components/fx/BlueGlow.jsx`, `src/components/landing/FormatsSection.jsx`, `src/components/landing/DesignSection.jsx`, `src/components/landing/TemplateBelt.jsx`, `src/components/landing/ProcessSection.jsx`.
+
+- *2026-10-03*: Removed the `overflow-hidden` class from `FormatsSection`, `DesignSection`, `TemplateBelt`, and `ProcessSection` `<section>` wrappers. This allows the newly added `BlueGlow` background effect to seamlessly bleed across section borders and blend into a single continuous background across the page instead of appearing as blocky cutoffs.
+  - Files affected: `src/components/landing/FormatsSection.jsx`, `src/components/landing/DesignSection.jsx`, `src/components/landing/TemplateBelt.jsx`, `src/components/landing/ProcessSection.jsx`.
+
+- *2026-10-03*: Updated `BlueGlow.jsx` to have higher base opacities and stronger tailwind background classes (e.g. `bg-blue-600/60`) so the dynamic glow is clearly visible in light mode. Used Tailwind's `dark:` variant (`dark:bg-blue-600/20`) to keep the effect subtle in dark mode.
+  - Files affected: `src/components/fx/BlueGlow.jsx`.
+
+- *2026-10-03*: Created a new reusable `BlueGlow` animated background component using a combination of blue, cyan, and indigo glowing orbs. Applied this background to all secondary landing page sections (Formats, Design, Gallery, Process) to make them less empty and more dynamic, specifically excluding the Hero section.
+  - Files affected: `src/components/fx/BlueGlow.jsx`, `src/components/landing/FormatsSection.jsx`, `src/components/landing/DesignSection.jsx`, `src/components/landing/TemplateBelt.jsx`, `src/components/landing/ProcessSection.jsx`.
+
+- *2026-10-03*: Removed the PRISM background image (and associated parallax motion wrapper) from the hero section to clean up the visual design. Ran linter to remove unused image constants and imports.
+  - Files affected: `src/components/landing/Hero.jsx`.
+
+- *2026-10-03*: Added a dark mode recommendation toggle ("Try Dark Mode!") directly in the landing page navbar (`LandingNav.jsx`) next to the main CTA. Also renamed the main CTA from "Open atelier" to "Open Glimpse".
+  - Files affected: `src/components/landing/LandingNav.jsx`.
+
+- *2026-10-03*: Redirected all dummy QR codes on the landing page to point to `https://glimpse01.vercel.app/` instead of old `module.studio` links. Also set the default URL for newly generated QR codes to `https://glimpse01.vercel.app/`.
+  - Files affected: `src/components/landing/HeroQR.jsx`, `src/components/landing/DesignSection.jsx`, `src/components/landing/TemplateBelt.jsx`, `src/components/landing/FormatsSection.jsx`, `src/utils/validation.js`.
+
 - *2026-10-03*: Created `vercel.json` to explicitly configure the Vercel Build Framework to Vite and output directory to `dist`, overriding cached framework detection. Fixed Vite 8 native configuration warning by replacing `__dirname` with `import.meta.dirname` in `vite.config.js`.
   - Files affected: `vercel.json`, `vite.config.js`.
 

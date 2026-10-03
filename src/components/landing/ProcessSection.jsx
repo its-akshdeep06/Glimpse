@@ -18,8 +18,8 @@ export default function ProcessSection() {
   const rotate = useTransform(scrollYProgress, [0, 1], [-4, 4]);
 
   return (
-    <section ref={ref} className="border-b border-carbon py-28 md:py-40">
-      <div className="mx-auto grid max-w-[1600px] gap-16 px-6 md:px-10 lg:grid-cols-2">
+    <section ref={ref} className="relative border-b border-carbon py-28 md:py-40">
+      <div className="relative z-10 mx-auto grid max-w-[1600px] gap-16 px-6 md:px-10 lg:grid-cols-2">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <p className="label-caps text-volt-text">04 — Process</p>
           <h2 className="mt-6 font-wide text-[clamp(2.4rem,5.5vw,5.5rem)] font-black uppercase leading-[0.95] tracking-tight">

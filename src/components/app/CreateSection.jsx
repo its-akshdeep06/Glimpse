@@ -38,11 +38,11 @@ export default function CreateSection({ qr, deck, setDeck, actions, isFavorite, 
   const customizer = <Customizer qr={qr} matrix={qrState.matrix} onDone={closeCustomizer} notify={notify} />;
 
   return (
-    <div className="lg:grid lg:min-h-[calc(100svh-4rem)] lg:grid-cols-[minmax(380px,460px)_1fr]">
-      <aside ref={formRef} className="scroll-mt-16 border-b border-carbon lg:border-b-0 lg:border-r">
+    <div className="lg:flex lg:h-[calc(100svh-4rem)] lg:overflow-hidden">
+      <aside ref={formRef} className="scroll-mt-16 border-b border-carbon lg:w-[420px] lg:shrink-0 lg:overflow-y-auto lg:border-b-0 lg:border-r">
         <QRForm qr={qr} onGenerate={handleGenerate} />
       </aside>
-      <section ref={previewRef} className="scroll-mt-16">
+      <section ref={previewRef} className="scroll-mt-16 lg:flex-1 lg:overflow-hidden">
         <QRPreview
           project={project}
           matrix={qrState.matrix}

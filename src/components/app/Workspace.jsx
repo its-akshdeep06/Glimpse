@@ -96,9 +96,9 @@ export default function Workspace() {
   };
 
   return (
-    <div className="min-h-screen bg-void text-ink">
+    <div className="h-screen overflow-hidden bg-void text-ink">
       <AppHeader section={section} onNavigate={openSection} />
-      <main className="pb-32">
+      <main className="h-[calc(100svh-4rem)]">
         <AnimatePresence mode="wait">
           <motion.div
             key={section}
