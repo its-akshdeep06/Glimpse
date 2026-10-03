@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 6% 10%;
+    --foreground: 220 14% 96%;
+    --card: 240 6% 13%;
+    --card-foreground: 220 14% 96%;
+    --popover: 240 6% 13%;
+    --popover-foreground: 220 14% 96%;
+    --primary: 213 87% 76%;
+    --primary-foreground: 240 30% 10%;
+    --secondary: 240 6% 16%;
+    --secondary-foreground: 220 14% 96%;
+    --muted: 240 6% 16%;
+    --muted-foreground: 220 9% 65%;
+    --accent: 213 60% 20%;
+    --accent-foreground: 213 87% 76%;
+    --destructive: 4 81% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 6% 20%;
+    --input: 240 6% 20%;
+    --ring: 213 87% 76%;
+    --chart-1: 213 87% 76%;
+    --chart-2: 4 81% 60%;
+    --chart-3: 251 94% 60%;
+    --chart-4: 52 100% 55%;
+    --chart-5: 142 69% 58%;
+    --radius: 0.75rem;
+    --font-heading: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'Geist', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sidebar-background: 240 6% 13%;
+    --sidebar-foreground: 220 14% 96%;
+    --sidebar-primary: 213 87% 76%;
+    --sidebar-primary-foreground: 240 30% 10%;
+    --sidebar-accent: 240 6% 16%;
+    --sidebar-accent-foreground: 220 14% 96%;
+    --sidebar-border: 240 6% 20%;
+    --sidebar-ring: 213 87% 76%;
+  }
+
+  html.light {
+    --background: 0 0% 100%;
+    --foreground: 220 9% 13%;
+    --card: 220 14% 98%;
+    --card-foreground: 220 9% 13%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 9% 13%;
+    --primary: 213 94% 51%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 9% 13%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 40%;
+    --accent: 213 100% 95%;
+    --accent-foreground: 213 80% 40%;
+    --destructive: 4 81% 56%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 9% 87%;
+    --input: 220 9% 87%;
+    --ring: 213 94% 51%;
+    --chart-1: 213 94% 51%;
+    --chart-2: 4 81% 56%;
+    --chart-3: 251 94% 60%;
+    --chart-4: 52 100% 50%;
+    --chart-5: 142 69% 45%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 9% 13%;
+    --sidebar-primary: 213 94% 51%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 220 9% 13%;
+    --sidebar-border: 220 9% 87%;
+    --sidebar-ring: 213 94% 51%;
+  }
+
+  /* Kinetic Precision palette — RGB channels (refined, Google-inspired) */
+  :root, .theme-dark {
+    --void: 23 23 27;
+    --panel: 31 31 36;
+    --carbon: 48 48 56;
+    --steel: 120 124 132;
+    --mute: 154 160 168;
+    --ink: 238 240 244;
+    --volt: 138 180 248;
+    --on-volt: 24 28 36;
+    --volt-text: 168 200 255;
+    --glass: 255 255 255;
+    color-scheme: dark;
+  }
+
+  html.light {
+    --void: 255 255 255;
+    --panel: 248 249 251;
+    --carbon: 218 220 224;
+    --steel: 128 134 140;
+    --mute: 95 99 104;
+    --ink: 32 33 36;
+    --volt: 66 133 244;
+    --on-volt: 255 255 255;
+    --volt-text: 26 115 232;
+    --glass: 0 0 0;
+    color-scheme: light;
+  }
+
+  /* Google-inspired brand accents — consistent across themes */
+  :root {
+    --g-blue: 66 133 244;
+    --g-red: 234 67 53;
+    --g-yellow: 251 188 4;
+    --g-green: 52 168 83;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: rgb(var(--void));
+    color: rgb(var(--ink));
+    font-family: var(--font-body);
+    font-size: 16px;
+  }
+
+  ::selection {
+    background: rgb(var(--volt));
+    color: rgb(var(--on-volt));
+  }
+}
+
+@layer components {
+  .font-wide {
+    font-family: 'Archivo', sans-serif;
+    font-stretch: 125%;
+  }
+
+  .label-caps {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgb(var(--ink) / 0.55);
+  }
+
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgb(var(--carbon) / 0.55) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--carbon) / 0.55) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .glass {
+    background: rgb(var(--glass) / 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgb(var(--glass) / 0.14);
+  }
+
+  .field {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgb(var(--carbon));
+    padding: 0.85rem 0;
+    font-size: 1.125rem;
+    color: rgb(var(--ink));
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  .field:focus { border-color: rgb(var(--volt-text)); }
+  .field::placeholder { color: rgb(var(--steel)); }
+  .field:disabled { opacity: 0.45; cursor: not-allowed; }
+  .field[aria-invalid='true'] { border-color: #ff6b5b; }
+
+  /* Hardware-style range slider */
+  .range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 28px;
+    background: transparent;
+    cursor: pointer;
+  }
+  .range::-webkit-slider-runnable-track {
+    height: 2px;
+    background: linear-gradient(to right, rgb(var(--volt-text)) var(--p), rgb(var(--carbon)) var(--p));
+  }
+  .range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 26px;
+    margin-top: -12px;
+    border-radius: 3px;
+    background: rgb(var(--ink));
+    box-shadow: 0 0 0 4px rgb(var(--void));
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .range:active::-webkit-slider-thumb { transform: scaleY(1.2); background: rgb(var(--volt)); }
+  .range::-moz-range-track { height: 2px; background: rgb(var(--carbon)); }
+  .range::-moz-range-progress { height: 2px; background: rgb(var(--volt-text)); }
+  .range::-moz-range-thumb { width: 12px; height: 26px; border: 0; border-radius: 3px; background: rgb(var(--ink)); }
+}
+
+/* Palette utilities defined in CSS so they work even without a config reload (variants still apply). */
+@layer utilities {
+  .bg-void { background-color: rgb(var(--void)); }
+  .bg-void\/60 { background-color: rgb(var(--void) / 0.6); }
+  .bg-void\/70 { background-color: rgb(var(--void) / 0.7); }
+  .bg-void\/80 { background-color: rgb(var(--void) / 0.8); }
+  .bg-void\/85 { background-color: rgb(var(--void) / 0.85); }
+  .bg-void\/90 { background-color: rgb(var(--void) / 0.9); }
+  .bg-panel { background-color: rgb(var(--panel)); }
+  .bg-panel\/95 { background-color: rgb(var(--panel) / 0.95); }
+  .bg-carbon { background-color: rgb(var(--carbon)); }
+  .bg-steel { background-color: rgb(var(--steel)); }
+  .bg-ink { background-color: rgb(var(--ink)); }
+  .bg-volt { background-color: rgb(var(--volt)); }
+  .bg-volt\/5 { background-color: rgb(var(--volt) / 0.05); }
+  .bg-volt\/10 { background-color: rgb(var(--volt) / 0.1); }
+  .bg-volt-text { background-color: rgb(var(--volt-text)); }
+  .bg-on-volt { background-color: rgb(var(--on-volt)); }
+  .text-void { color: rgb(var(--void)); }
+  .text-ink { color: rgb(var(--ink)); }
+  .text-ink\/80 { color: rgb(var(--ink) / 0.8); }
+  .text-mute { color: rgb(var(--mute)); }
+  .text-steel { color: rgb(var(--steel)); }
+  .text-volt { color: rgb(var(--volt)); }
+  .text-volt-text { color: rgb(var(--volt-text)); }
+  .text-on-volt { color: rgb(var(--on-volt)); }
+  .border-carbon { border-color: rgb(var(--carbon)); }
+  .border-steel { border-color: rgb(var(--steel)); }
+  .border-ink { border-color: rgb(var(--ink)); }
+  .border-volt { border-color: rgb(var(--volt)); }
+  .border-volt-text { border-color: rgb(var(--volt-text)); }
+  .ring-carbon { --tw-ring-color: rgb(var(--carbon)); }
+  .fill-volt-text { fill: rgb(var(--volt-text)); }
+  .decoration-carbon { text-decoration-color: rgb(var(--carbon)); }
+  .decoration-volt { text-decoration-color: rgb(var(--volt)); }
+  .from-void\/80 { --tw-gradient-from: rgb(var(--void) / 0.8) var(--tw-gradient-from-position); --tw-gradient-to: rgb(var(--void) / 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+  .from-void\/90 { --tw-gradient-from: rgb(var(--void) / 0.9) var(--tw-gradient-from-position); --tw-gradient-to: rgb(var(--void) / 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+  .bg-g-blue { background-color: rgb(var(--g-blue)); }
+  .bg-g-red { background-color: rgb(var(--g-red)); }
+  .bg-g-yellow { background-color: rgb(var(--g-yellow)); }
+  .bg-g-green { background-color: rgb(var(--g-green)); }
+  .text-g-blue { color: rgb(var(--g-blue)); }
+  .text-g-red { color: rgb(var(--g-red)); }
+  .text-g-yellow { color: rgb(var(--g-yellow)); }
+  .text-g-green { color: rgb(var(--g-green)); }
+}
+
+/* QR module re-assembly */
+.qm {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: qm-in 0.9s cubic-bezier(0.18, 0.89, 0.32, 1.18) both;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes qm-in {
+  0% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0.1) rotate(90deg); }
+  60% { opacity: 1; }
+  100% { opacity: 1; transform: none; }
+}
+.qf {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: qf-in 1s cubic-bezier(0.2, 0.9, 0.2, 1.2) both;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes qf-in {
+  from { opacity: 0; transform: scale(0.2) rotate(-45deg); }
+  to { opacity: 1; transform: none; }
+}
+.qr-paint { transition: fill 0.5s ease; }
+.qr-stop { transition: stop-color 0.5s ease; }
+
+/* Infinity belt */
+.belt { display: flex; width: max-content; animation: belt 70s linear infinite; }
+.belt-wrap:hover .belt { animation-play-state: paused; }
+@keyframes belt { to { transform: translateX(-50%); } }
+
+@keyframes sheen { to { transform: translateX(100%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .qm, .qf { animation: none !important; }
+  .belt { animation-duration: 240s; }
+  html { scroll-behavior: auto; }
+}

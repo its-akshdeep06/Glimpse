@@ -1,0 +1,40 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
+import LogoMark from '@/components/brand/LogoMark';
+import Magnetic from '@/components/fx/Magnetic';
+
+const LINKS = [['Formats', '#formats'], ['Design', '#design'], ['Gallery', '#gallery'], ['Privacy', '#privacy']];
+
+export default function LandingNav() {
+  const { scrollY } = useScroll();
+  const [hidden, setHidden] = useState(false);
+  useMotionValueEvent(scrollY, 'change', (v) => setHidden(v > (scrollY.getPrevious() ?? 0) && v > 240));
+
+  return (
+    <motion.header
+      animate={{ y: hidden ? -110 : 0 }}
+      transition={{ duration: 0.5, ease: [0.2, 0.9, 0.1, 1] }}
+      className="fixed inset-x-0 top-0 z-50 bg-gradient-to-b from-void/90 to-transparent"
+    >
+      <div className="mx-auto flex h-20 max-w-[1600px] items-center justify-between px-6 md:px-10">
+        <Link to="/" className="flex items-center gap-3">
+          <LogoMark />
+          <span className="font-wide text-lg font-extrabold tracking-tight">GLIMPSE</span>
+        </Link>
+        <nav className="hidden items-center gap-10 md:flex">
+          {LINKS.map(([label, href]) => (
+            <a key={label} href={href} className="label-caps text-mute transition-colors hover:text-ink">{label}</a>
+          ))}
+        </nav>
+        <Magnetic>
+          <Link to="/app" className="group flex items-center gap-2 rounded-full border border-carbon bg-void/60 px-5 py-2.5 label-caps backdrop-blur transition-colors hover:border-volt hover:bg-volt hover:text-on-volt">
+            Open atelier
+            <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
+          </Link>
+        </Magnetic>
+      </div>
+    </motion.header>
+  );
+}
