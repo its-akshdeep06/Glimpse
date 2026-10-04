@@ -16,7 +16,7 @@ export default function NamingDialog({ request, onClose }) {
         <form onSubmit={submit}>
           <p className="label-caps text-volt-text">Name this code</p>
           <h2 className="mt-2 font-wide text-2xl font-extrabold uppercase">Give it a name?</h2>
-          <p className="mt-2 text-mute">Names only help you find it later — they're never encoded.</p>
+          <p className="mt-2 text-mute">Names only help you find it later, they're never encoded.</p>
           <input autoFocus value={value} onChange={(e) => setValue(e.target.value)} className="field mt-6" placeholder={request.suggestion} maxLength={60} />
           <div className="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
             <button type="button" onClick={() => request.onResolve('')} className="rounded-full border border-carbon px-5 py-3 label-caps hover:border-ink">Skip · use {request.suggestion}</button>

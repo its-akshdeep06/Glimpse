@@ -23,7 +23,7 @@ export default function EmptyCanvas() {
       />
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
         <p className="bg-void px-3 py-1 label-caps">No signal</p>
-        <p className="mt-2 max-w-[15rem] bg-void/85 px-3 py-1 text-sm text-mute">Enter content and press Generate — your code assembles here.</p>
+        <p className="mt-2 max-w-[15rem] bg-void/85 px-3 py-1 text-sm text-mute">Enter content and press Generate, your code assembles here.</p>
       </div>
     </div>
   );

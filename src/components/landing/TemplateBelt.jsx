@@ -18,13 +18,13 @@ export default function TemplateBelt() {
     <section id="gallery" className="relative border-b border-carbon py-28 md:py-40">
       <div className="relative z-10 mx-auto flex max-w-[1600px] flex-col gap-6 px-6 md:flex-row md:items-end md:justify-between md:px-10">
         <Reveal>
-          <p className="label-caps text-volt-text">03 — Gallery</p>
+          <p className="label-caps text-volt-text">03 - Gallery</p>
           <h2 className="mt-6 font-wide text-[clamp(2.4rem,5.5vw,5.5rem)] font-black uppercase leading-[0.95] tracking-tight">
             Pattern<br /><span className="text-outline">gallery.</span>
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
-          <p className="max-w-sm text-lg leading-relaxed text-mute">Presets are purely visual — they restyle your code, never your content. Hover to inspect every module.</p>
+          <p className="max-w-sm text-lg leading-relaxed text-mute">Presets are purely visual, they restyle your code, never your content. Hover to inspect every module.</p>
         </Reveal>
       </div>
       <div className="belt-wrap mt-16 overflow-hidden">

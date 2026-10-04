@@ -76,7 +76,7 @@ export function gradientSpec(gradient, total) {
 
 const attrs = (o) => Object.entries(o).map(([k, v]) => `${k}="${typeof v === 'number' ? +v.toFixed(3) : v}"`).join(' ');
 
-export function buildSVGString(matrix, c, size = c.size) {
+export function buildSVGString(matrix, c, size = c.size, { omitLogo = false } = {}) {
   const L = computeLayout(matrix, c.margin, c.logo);
   const fill = c.gradient.enabled ? 'url(#qg)' : c.foregroundColor;
   const parts = [`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${size}" height="${size}" viewBox="0 0 ${L.total} ${L.total}">`];
@@ -94,7 +94,7 @@ export function buildSVGString(matrix, c, size = c.size) {
   L.finders.forEach((f) => finderRects(c.moduleStyle, f).forEach((r) => {
     parts.push(`<rect ${attrs({ x: r.x, y: r.y, width: r.size, height: r.size, rx: r.rx })} fill="${r.layer === 'bg' ? c.backgroundColor : fill}"/>`);
   }));
-  if (L.logo) {
+  if (L.logo && !omitLogo) {
     const { x, y, size: s, pad } = L.logo;
     parts.push(`<rect ${attrs({ x: x - pad, y: y - pad, width: s + pad * 2, height: s + pad * 2, rx: pad * 1.2 })} fill="${c.backgroundColor}"/>`);
     parts.push(`<image ${attrs({ x, y, width: s, height: s })} preserveAspectRatio="xMidYMid meet" href="${c.logo.dataUrl}" xlink:href="${c.logo.dataUrl}"/>`);
@@ -110,10 +110,57 @@ export function projectThumbnail(project, px = 360) {
   return matrix ? svgDataUrl(buildSVGString(matrix, project.customization, px)) : null;
 }
 
+// Draws a logo onto an existing canvas using separate image loading to avoid
+// the canvas-taint that occurs when an SVG data-URL embeds a foreign <image>.
+async function drawLogoOnCanvas(canvas, matrix, c) {
+  const L = computeLayout(matrix, c.margin, c.logo);
+  if (!L.logo) return;
+  const ctx = canvas.getContext('2d');
+  const scale = c.size / L.total;
+  const { x, y, size: s, pad } = L.logo;
+
+  // Draw the background rect that clears space for the logo
+  ctx.fillStyle = c.backgroundColor;
+  const rx = pad * 1.2 * scale;
+  const bx = (x - pad) * scale;
+  const by = (y - pad) * scale;
+  const bw = (s + pad * 2) * scale;
+  const bh = (s + pad * 2) * scale;
+  ctx.beginPath();
+  if (ctx.roundRect) {
+    ctx.roundRect(bx, by, bw, bh, rx);
+  } else {
+    // Fallback for browsers without roundRect
+    ctx.moveTo(bx + rx, by);
+    ctx.arcTo(bx + bw, by, bx + bw, by + bh, rx);
+    ctx.arcTo(bx + bw, by + bh, bx, by + bh, rx);
+    ctx.arcTo(bx, by + bh, bx, by, rx);
+    ctx.arcTo(bx, by, bx + bw, by, rx);
+    ctx.closePath();
+  }
+  ctx.fill();
+
+  // Draw the logo image directly (not through SVG) to avoid canvas tainting
+  const logoImg = new Image();
+  logoImg.src = c.logo.dataUrl;
+  await logoImg.decode();
+  ctx.drawImage(logoImg, x * scale, y * scale, s * scale, s * scale);
+}
+
 export async function exportImage(project, format = 'png') {
   const c = project.customization;
-  const svg = buildSVGString(generateMatrix(project.encoded, c.errorCorrection), c, c.size);
-  if (format === 'svg') return new Blob([svg], { type: 'image/svg+xml' });
+  const matrix = generateMatrix(project.encoded, c.errorCorrection);
+  const hasLogo = Boolean(c.logo?.dataUrl);
+
+  // For SVG export, embed everything including the logo (no taint issue in SVG files)
+  if (format === 'svg') {
+    const svg = buildSVGString(matrix, c, c.size);
+    return new Blob([svg], { type: 'image/svg+xml' });
+  }
+
+  // For raster export, render SVG without the logo to avoid canvas tainting,
+  // then draw the logo separately from its own Image element.
+  const svg = buildSVGString(matrix, c, c.size, { omitLogo: hasLogo });
   const img = new Image();
   img.src = svgDataUrl(svg);
   await img.decode();
@@ -121,6 +168,12 @@ export async function exportImage(project, format = 'png') {
   canvas.width = c.size;
   canvas.height = c.size;
   canvas.getContext('2d').drawImage(img, 0, 0, c.size, c.size);
+
+  // Composite the logo onto the canvas directly
+  if (hasLogo) {
+    await drawLogoOnCanvas(canvas, matrix, c);
+  }
+
   return new Promise((resolve, reject) => {
     canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('Could not create the image.'))), 'image/png');
   });

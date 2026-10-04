@@ -24,7 +24,7 @@ export default function Customizer({ qr, matrix, onDone, notify }) {
     <div className="flex flex-col">
       <div className="flex items-center justify-between gap-3 px-5 pt-1 md:px-8 lg:pt-10">
         <div>
-          <p className="label-caps text-mute">03 — Customize</p>
+          <p className="label-caps text-mute">03 - Customize</p>
           <h2 className="mt-1 font-wide text-2xl font-extrabold uppercase leading-none">Design lab</h2>
         </div>
         <div className="flex items-center gap-2">

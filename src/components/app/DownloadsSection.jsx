@@ -17,7 +17,7 @@ export default function DownloadsSection({ items, onDelete, onCreate }) {
           </AnimatePresence>
         </div>
       ) : (
-        <EmptyState title="No downloads yet" text="Every image you download is kept here — exactly as it looked — so you can grab it again." actionLabel="Create a QR" onAction={onCreate} />
+        <EmptyState title="No downloads yet" text="Every image you download is kept here, exactly as it looked so you can grab it again." actionLabel="Create a QR" onAction={onCreate} />
       )}
       <DownloadPreviewDialog record={preview} onClose={() => setPreview(null)} />
     </div>

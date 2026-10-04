@@ -32,7 +32,7 @@ export default function DesignSection() {
       <div className="relative z-10 mx-auto grid max-w-[1600px] items-center gap-16 px-6 md:px-10 lg:grid-cols-2">
         <div>
           <Reveal>
-            <p className="label-caps text-volt-text">02 — Design</p>
+            <p className="label-caps text-volt-text">02 - Design</p>
             <h2 className="mt-6 font-wide text-[clamp(2.4rem,5.5vw,5.5rem)] font-black uppercase leading-[0.95] tracking-tight">
               Every module,<br /><span className="text-outline">yours.</span>
             </h2>

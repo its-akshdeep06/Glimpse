@@ -50,7 +50,7 @@ export default function LogoControl({ c, update, commit, notify }) {
         <button type="button" onClick={() => inputRef.current.click()} className="group mt-4 flex w-full flex-col items-center justify-center gap-3 border border-dashed border-carbon py-10 transition-colors hover:border-volt-text">
           <ImagePlus className="h-6 w-6 text-mute transition-transform group-hover:scale-110 group-hover:text-volt-text" />
           <span className="label-caps">Upload logo</span>
-          <span className="px-6 text-center text-sm text-mute">PNG, JPG or SVG — oversized images are scaled automatically</span>
+          <span className="px-6 text-center text-sm text-mute">PNG, JPG or SVG, oversized images are scaled automatically</span>
         </button>
       )}
       <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={onFile} />

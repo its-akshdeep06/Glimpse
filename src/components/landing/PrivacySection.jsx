@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import LiquidNumber from '@/components/fx/LiquidNumber';
 
-const TEXT = "Your links, passwords and phone numbers are encoded right here, inside your browser. No accounts. No servers. No tracking. Close the tab — it's still yours.";
+const TEXT = "Your links, your passwords and your phone numbers, encoded right here, right inside your browser. No accounts. No servers. No tracking. Close the tab and it's still yours!";
 const STATS = [
   { value: 5, from: 0, label: 'QR formats' },
   { value: 0, from: 99, label: 'Servers involved' },
@@ -23,7 +23,7 @@ export default function PrivacySection() {
   return (
     <section id="privacy" className="border-b border-carbon py-28 md:py-40">
       <div className="mx-auto max-w-[1600px] px-6 md:px-10">
-        <p className="label-caps text-volt-text">05 — Privacy</p>
+        <p className="label-caps text-volt-text">05 - Privacy</p>
         <p ref={ref} className="mt-10 max-w-6xl font-wide text-[clamp(1.75rem,4.2vw,4rem)] font-extrabold leading-[1.08] tracking-tight">
           {words.map((w, i) => (
             <Word key={i} progress={scrollYProgress} range={[i / words.length, (i + 1) / words.length]}>{w}</Word>

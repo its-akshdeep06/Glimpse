@@ -19,7 +19,7 @@ export default function TypeFields({ type, values, error, onChange }) {
       <div className="space-y-8">
         <Field label="Recipient" error={error('to')}><input {...bind('to')} type="email" inputMode="email" placeholder="hello@studio.com" /></Field>
         <Field label="Subject · optional" error={error('subject')}><input {...bind('subject')} placeholder="Project enquiry" /></Field>
-        <Field label="Message · optional" error={error('body')}><textarea {...bind('body')} rows={3} placeholder="Hi there —" className="field resize-none" /></Field>
+        <Field label="Message · optional" error={error('body')}><textarea {...bind('body')} rows={3} placeholder="Hi there..." className="field resize-none" /></Field>
       </div>
     );
   }

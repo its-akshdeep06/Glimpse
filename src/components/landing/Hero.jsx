@@ -30,7 +30,7 @@ export default function Hero() {
             </span>
           </h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7, duration: 0.9 }} className="mt-8 max-w-xl text-lg leading-relaxed text-mute">
-            A precision instrument for QR codes. Five formats, total visual control, a full undo history — and nothing ever leaves your device.
+            A precision instrument for QR codes. Five formats, total visual control, a full undo history and nothing ever leaves your device!
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.85, duration: 0.9 }} className="mt-10 flex flex-wrap items-center gap-6">
             <Magnetic>

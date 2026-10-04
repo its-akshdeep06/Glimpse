@@ -7,7 +7,7 @@ export default function ColorField({ label, value, onChange, onCommit }) {
   const pickerRef = useRef(null);
   useEffect(() => setText(value), [value]);
 
-  // The native "change" event fires when the picker closes — one history step per pick.
+  // The native "change" event fires when the picker closes - one history step per pick.
   useEffect(() => {
     const el = pickerRef.current;
     el.addEventListener('change', onCommit);

@@ -7,6 +7,7 @@ import MobileSheet from '@/components/app/MobileSheet';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import { generateMatrix } from '@/services/qrService';
 import { assessScanRisks } from '@/utils/validation';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 export default function CreateSection({ qr, deck, setDeck, actions, isFavorite, notify }) {
   const { project } = qr;
@@ -43,23 +44,33 @@ export default function CreateSection({ qr, deck, setDeck, actions, isFavorite, 
         <QRForm qr={qr} onGenerate={handleGenerate} />
       </aside>
       <section ref={previewRef} className="scroll-mt-16 lg:flex-1 lg:overflow-hidden">
-        <QRPreview
-          project={project}
-          matrix={qrState.matrix}
-          error={qrState.error}
-          risks={risks}
-          dirty={qr.dirty}
-          isFavorite={isFavorite}
-          history={{ canUndo: qr.canUndo, canRedo: qr.canRedo, onUndo: qr.undo, onRedo: qr.redo }}
-          actions={actions}
-          onEdit={editContent}
-          onCustomize={customize}
-        />
+        <ErrorBoundary name="QRPreview">
+          <QRPreview
+            project={project}
+            matrix={qrState.matrix}
+            error={qrState.error}
+            risks={risks}
+            dirty={qr.dirty}
+            isFavorite={isFavorite}
+            history={{ canUndo: qr.canUndo, canRedo: qr.canRedo, onUndo: qr.undo, onRedo: qr.redo }}
+            actions={actions}
+            onEdit={editContent}
+            onCustomize={customize}
+          />
+        </ErrorBoundary>
       </section>
       {isDesktop ? (
-        <CustomizerDrawer open={deck === 'customize'} onClose={closeCustomizer}>{customizer}</CustomizerDrawer>
+        <CustomizerDrawer open={deck === 'customize'} onClose={closeCustomizer}>
+          <ErrorBoundary name="Customizer">
+            {customizer}
+          </ErrorBoundary>
+        </CustomizerDrawer>
       ) : (
-        <MobileSheet open={deck === 'customize'} onClose={closeCustomizer}>{customizer}</MobileSheet>
+        <MobileSheet open={deck === 'customize'} onClose={closeCustomizer}>
+          <ErrorBoundary name="Customizer">
+            {customizer}
+          </ErrorBoundary>
+        </MobileSheet>
       )}
     </div>
   );

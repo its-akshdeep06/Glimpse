@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { SECTIONS } from '@/lib/sections';
 
-const RADIUS = 118;
+const RADIUS = 154;
 
 // "Fixed orbit" hub: expands into a radial array of the six sections.
 export default function OrbitNav({ section, onNavigate }) {
@@ -23,10 +23,10 @@ export default function OrbitNav({ section, onNavigate }) {
       <AnimatePresence>
         {open && <motion.div className="fixed inset-0 z-40 bg-void/60 backdrop-blur-[3px]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setOpen(false)} />}
       </AnimatePresence>
-      <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 lg:hidden">
+      <div className="fixed bottom-6 right-6 z-50 lg:hidden">
         <div className="relative h-16 w-16">
           {SECTIONS.map((s, i) => {
-            const a = Math.PI - (i * Math.PI) / (SECTIONS.length - 1);
+            const a = Math.PI - (i * Math.PI / 2) / (SECTIONS.length - 1);
             const x = Math.cos(a) * RADIUS;
             const y = -Math.sin(a) * RADIUS * 0.95;
             const SIcon = s.icon;

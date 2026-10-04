@@ -296,6 +296,44 @@
 
 @keyframes sheen { to { transform: translateX(100%); } }
 
+.cursor-highlight {
+  position: fixed;
+  z-index: 9999;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #202124;
+  background: transparent;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform;
+  transition: width 220ms cubic-bezier(0.2, 0.8, 0.2, 1), height 220ms cubic-bezier(0.2, 0.8, 0.2, 1), background-color 180ms ease, border-color 180ms ease, opacity 120ms ease;
+}
+.cursor-highlight.is-visible { opacity: 1; }
+.cursor-highlight.is-hovering {
+  width: 64px;
+  height: 64px;
+  border-color: transparent;
+  background: rgb(96 56 14 / 82%);
+}
+.cursor-highlight__center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  background: #4285f4;
+  transform: translate(-50%, -50%);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cursor-highlight { display: block; }
+  html.custom-cursor, html.custom-cursor * { cursor: none !important; }
+}
+@media (hover: none), (pointer: coarse) {
+  .cursor-highlight { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .qm, .qf { animation: none !important; }
   .belt { animation-duration: 240s; }

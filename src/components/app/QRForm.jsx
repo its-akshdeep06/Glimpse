@@ -28,7 +28,7 @@ export default function QRForm({ qr, onGenerate }) {
   return (
     <form onSubmit={submit} className="space-y-10 p-6 md:p-10" noValidate>
       <div>
-        <p className="label-caps text-mute">01 — Content</p>
+        <p className="label-caps text-mute">01 - Content</p>
         <h2 className="mt-2 font-wide text-3xl font-extrabold uppercase leading-none tracking-tight">What should it say?</h2>
       </div>
       <Field label="Name · optional" hint="Never encoded">

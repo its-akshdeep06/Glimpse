@@ -52,7 +52,7 @@ export default function Workspace() {
   const openSection = async (id) => {
     if (id === 'create' && section === 'create') {
       if (qr.dirty && hasContent(qr.project)) {
-        try { await draft.flush(); notify('Your previous work was kept as the draft'); } catch (e) { reportError(e); }
+        try { await draft.flush(); notify('Your previous work was kept as draft'); } catch (e) { reportError(e); }
       }
       qr.reset();
       setDeck('content');
@@ -98,13 +98,13 @@ export default function Workspace() {
   return (
     <div className="h-screen overflow-hidden bg-void text-ink">
       <AppHeader section={section} onNavigate={openSection} />
-      <main className="h-[calc(100svh-4rem)]">
+      <main className="h-[calc(100svh-4rem)] overflow-y-auto overscroll-contain">
         <AnimatePresence mode="wait">
           <motion.div
             key={section}
-            initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, y: -20, filter: 'blur(6px)' }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
             transition={{ type: 'spring', stiffness: 260, damping: 26 }}
           >
             <SectionView
