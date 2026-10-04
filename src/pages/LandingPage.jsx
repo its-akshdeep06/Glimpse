@@ -9,18 +9,16 @@ const ProcessSection = lazy(() => import('@/components/landing/ProcessSection'))
 const PrivacySection = lazy(() => import('@/components/landing/PrivacySection'));
 const CurtainFooter = lazy(() => import('@/components/landing/CurtainFooter'));
 const BlueGlow = lazy(() => import('@/components/fx/BlueGlow'));
-import useDynamicFavicon from '@/hooks/useDynamicFavicon';
 
 
 export default function LandingPage() {
-  useDynamicFavicon('home');
-  useEffect(() => { document.title = 'GLIMPSE — QR Atelier'; }, []);
+  useEffect(() => { document.title = 'GLIMPSE - QR Atelier'; }, []);
 
   return (
     <Suspense fallback={<div className="text-center py-12">Loading...</div>}>
       <div className="bg-void text-ink">
         <LandingNav />
-        <main className="relative z-10 mb-[92svh] overflow-clip rounded-b-[2rem] bg-void shadow-[0_40px_90px_-20px_rgba(60,64,67,0.18)] md:rounded-b-[3rem]">
+        <main className="relative z-10 mb-[37rem] overflow-clip rounded-b-[2rem] bg-void shadow-[0_40px_90px_-20px_rgba(60,64,67,0.18)] min-[360px]:mb-[47rem] md:mb-[92svh] md:rounded-b-[3rem]">
           <Hero />
           <TypesMarquee />
           <div className="relative overflow-hidden">

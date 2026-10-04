@@ -4,7 +4,7 @@ import SectionHeader from '@/components/app/SectionHeader';
 import ProjectCard from '@/components/app/ProjectCard';
 import EmptyState from '@/components/app/EmptyState';
 
-export default function LibrarySection({ index, title, meta, items, favoriteIds, onOpen, onToggleFavorite, onDelete, emptyTitle, emptyText, onCreate }) {
+export default function LibrarySection({ index, title, meta, items, favoriteIds, onOpen, onToggleFavorite, onDelete = undefined, emptyTitle, emptyText, onCreate }) {
   return (
     <div className="px-5 py-10 md:px-10 md:py-16">
       <SectionHeader index={index} title={title} meta={meta} />

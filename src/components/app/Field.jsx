@@ -1,7 +1,7 @@
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-export default function Field({ label, hint, error, children, asDiv = false }) {
+export default function Field({ label, hint = '', error = null, children, asDiv = false }) {
   const Root = asDiv ? 'div' : 'label';
   return (
     <Root className="group block">

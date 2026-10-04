@@ -1,4 +1,4 @@
-// Visual presets only — they never contain or change QR content.
+// Visual presets only - they never contain or change QR content.
 const g = (enabled, color, type = 'linear', angle = 135) => ({ enabled, type, color, angle });
 
 export const TEMPLATES = [

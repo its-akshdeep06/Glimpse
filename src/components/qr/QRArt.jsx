@@ -11,15 +11,16 @@ export default function QRArt({ matrix, customization: c, animate = true, assemb
   const Grad = grad?.tag;
 
   const modules = useMemo(() => layout.modules.map((m) => {
-    const { tag: Tag, attrs } = moduleShape(c.moduleStyle, m.x, m.y);
-    return (
-      <Tag
-        key={`${m.x}.${m.y}`}
-        {...attrs}
-        className={animate ? 'qm' : undefined}
-        style={animate ? { '--d': `${m.delay}ms`, '--tx': `${m.tx}px`, '--ty': `${m.ty}px` } : undefined}
-      />
-    );
+    const { tag, attrs } = moduleShape(c.moduleStyle, m.x, m.y);
+    const style = animate
+      ? /** @type {import('react').CSSProperties & { '--d': string; '--tx': string; '--ty': string }} */ ({ '--d': `${m.delay}ms`, '--tx': `${m.tx}px`, '--ty': `${m.ty}px` })
+      : undefined;
+    return React.createElement(tag, {
+      ...attrs,
+      key: `${m.x}.${m.y}`,
+      className: animate ? 'qm' : undefined,
+      style,
+    });
   }), [layout, c.moduleStyle, animate]);
 
   const L = layout.logo;
@@ -27,17 +28,17 @@ export default function QRArt({ matrix, customization: c, animate = true, assemb
     <svg viewBox={`0 0 ${layout.total} ${layout.total}`} className={className} role="img" aria-label="QR code preview">
       {grad && (
         <defs>
-          <Grad id={`g${uid}`} {...grad.attrs}>
-            <stop offset="0" stopColor={c.foregroundColor} className="qr-stop" />
-            <stop offset="1" stopColor={c.gradient.color} className="qr-stop" />
-          </Grad>
+          {React.createElement(grad.tag, { id: `g${uid}`, ...grad.attrs },
+            <stop offset="0" stopColor={c.foregroundColor} className="qr-stop" />,
+            <stop offset="1" stopColor={c.gradient.color} className="qr-stop" />,
+          )}
         </defs>
       )}
       <rect width={layout.total} height={layout.total} fill={c.backgroundColor} className="qr-paint" />
       <g key={assembleKey} fill={fill} className="qr-paint">{modules}</g>
       <g key={`f-${assembleKey}`}>
         {layout.finders.map((f, i) => (
-          <g key={i} className={animate ? 'qf' : undefined} style={animate ? { '--d': `${i * 90}ms` } : undefined}>
+          <g key={i} className={animate ? 'qf' : undefined} style={animate ? /** @type {import('react').CSSProperties & { '--d': string }} */ ({ '--d': `${i * 90}ms` }) : undefined}>
             {finderRects(c.moduleStyle, f).map((r, j) => (
               <rect key={j} x={r.x} y={r.y} width={r.size} height={r.size} rx={r.rx} fill={r.layer === 'bg' ? c.backgroundColor : fill} className="qr-paint" />
             ))}
@@ -45,7 +46,7 @@ export default function QRArt({ matrix, customization: c, animate = true, assemb
         ))}
       </g>
       {L && (
-        <g className={animate ? 'qf' : undefined} style={animate ? { '--d': '450ms' } : undefined}>
+        <g className={animate ? 'qf' : undefined} style={animate ? /** @type {import('react').CSSProperties & { '--d': string }} */ ({ '--d': '450ms' }) : undefined}>
           <rect x={L.x - L.pad} y={L.y - L.pad} width={L.size + L.pad * 2} height={L.size + L.pad * 2} rx={L.pad * 1.2} fill={c.backgroundColor} className="qr-paint" />
           <image href={c.logo.dataUrl} x={L.x} y={L.y} width={L.size} height={L.size} preserveAspectRatio="xMidYMid meet" />
         </g>

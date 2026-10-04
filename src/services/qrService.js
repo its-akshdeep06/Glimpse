@@ -195,7 +195,7 @@ export function triggerDownload(blob, filename) {
   setTimeout(() => URL.revokeObjectURL(url), 1500);
 }
 
-// Shares only the image file — never the encoded content.
+// Shares only the image file - never the encoded content.
 export async function shareImage(blob, name) {
   const file = new File([blob], fileName(name, 'png'), { type: 'image/png' });
   if (!navigator.canShare?.({ files: [file] })) return 'unsupported';

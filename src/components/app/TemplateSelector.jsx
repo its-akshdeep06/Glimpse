@@ -46,7 +46,7 @@ export default function TemplateSelector({ matrix, customization, onApply, varia
           );
         })}
       </div>
-      <div className={`sticky z-10 mt-6 flex items-center justify-between gap-4 border border-carbon bg-void/90 px-4 py-3 backdrop-blur-xl ${gallery ? 'bottom-28 lg:bottom-6' : 'bottom-3'}`}>
+      <div className={`z-10 mt-6 flex items-center justify-between gap-4 border border-carbon bg-void/90 px-4 py-3 backdrop-blur-xl ${gallery ? 'lg:sticky lg:bottom-6' : 'sticky bottom-3'}`}>
         <p className="text-sm text-mute">{chosen ? <>Previewing <span className="text-ink">{chosen.name}</span></> : 'Select a preset to preview it.'}</p>
         <button type="button" disabled={!chosen} onClick={() => { onApply(chosen); setSelected(null); }} className="rounded-full bg-volt px-6 py-2.5 label-caps font-semibold text-on-volt transition-colors disabled:bg-carbon disabled:text-mute">
           Apply

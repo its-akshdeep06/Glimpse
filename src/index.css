@@ -80,7 +80,7 @@
     --sidebar-ring: 213 94% 51%;
   }
 
-  /* Kinetic Precision palette — RGB channels (refined, Google-inspired) */
+  /* Kinetic Precision palette - RGB channels (refined, Google-inspired) */
   :root, .theme-dark {
     --void: 23 23 27;
     --panel: 31 31 36;
@@ -109,7 +109,7 @@
     color-scheme: light;
   }
 
-  /* Google-inspired brand accents — consistent across themes */
+  /* Google-inspired brand accents - consistent across themes */
   :root {
     --g-blue: 66 133 244;
     --g-red: 234 67 53;
@@ -326,11 +326,11 @@
   transform: translate(-50%, -50%);
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media (hover: hover) and (pointer: fine) and (min-width: 768px) {
   .cursor-highlight { display: block; }
   html.custom-cursor, html.custom-cursor * { cursor: none !important; }
 }
-@media (hover: none), (pointer: coarse) {
+@media (hover: none), (pointer: coarse), (max-width: 767px) {
   .cursor-highlight { display: none; }
 }
 

@@ -1,8 +1,9 @@
 import React from 'react';
 
 // Slider that previews live (transient) and records one history step on release.
-export default function RangeField({ label, value, min, max, step = 1, format = (v) => v, onChange, onCommit, marker }) {
+export default function RangeField({ label, value, min, max, step = 1, format = (v) => v, onChange, onCommit, marker = null }) {
   const pct = ((value - min) / (max - min)) * 100;
+  const rangeStyle = /** @type {import('react').CSSProperties & { '--p': string }} */ ({ '--p': `${pct}%` });
   return (
     <div>
       <div className="flex items-baseline justify-between">
@@ -21,7 +22,7 @@ export default function RangeField({ label, value, min, max, step = 1, format = 
           onKeyUp={onCommit}
           onBlur={onCommit}
           className="range"
-          style={{ '--p': `${pct}%` }}
+          style={rangeStyle}
           aria-label={label}
         />
         {marker != null && (

@@ -107,7 +107,7 @@ export default function FormatsSection() {
 
               <div className="relative grid grid-cols-[auto_1fr] items-center gap-x-6 gap-y-3 py-8 transition-colors duration-500 group-hover:text-on-volt md:grid-cols-[80px_1fr_1fr_110px] md:gap-10 md:py-10">
 
-                {/* NUMBER — MOVED RIGHT */}
+                {/* NUMBER - MOVED RIGHT */}
                 <span className="label-caps translate-x-2 text-mute group-hover:text-on-volt">
                   {f.n}
                 </span>
@@ -126,7 +126,7 @@ export default function FormatsSection() {
                   </p>
                 </div>
 
-                {/* QR CODE — MOVED LEFT */}
+                {/* QR CODE - MOVED LEFT */}
                 <img
                   src={previews[i]}
                   alt=""

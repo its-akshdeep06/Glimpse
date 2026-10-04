@@ -4,7 +4,7 @@ export default function CursorHighlight() {
   const cursorRef = useRef(null);
 
   useEffect(() => {
-    const media = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const media = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 768px)');
     if (!media.matches) return undefined;
 
     const cursor = cursorRef.current;

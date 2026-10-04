@@ -50,28 +50,28 @@ export default function LandingNav() {
       }}
       className="fixed inset-x-0 top-0 z-50 bg-gradient-to-b from-void/90 to-transparent"
     >
-      <div className="mx-auto flex h-20 max-w-[1600px] items-center justify-between px-6 md:px-10">
+      <div className="mx-auto flex h-20 max-w-[1600px] items-center justify-between gap-3 px-4 sm:px-6 md:px-10">
 
-        {/* GLIMPSE — SMOOTH SCROLL TO TOP */}
+        {/* GLIMPSE - SMOOTH SCROLL TO TOP */}
         <a
           href="#top"
           onClick={scrollToTop}
-          className="flex items-center gap-3"
+          className="flex shrink-0 items-center gap-2 sm:gap-3"
         >
           <LogoMark />
 
-          <span className="font-wide text-lg font-extrabold tracking-tight">
+          <span className="hidden min-[360px]:inline font-wide text-lg font-extrabold tracking-tight">
             GLIMPSE
           </span>
         </a>
 
         {/* RIGHT SIDE */}
-        <div className="flex items-center gap-4">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-4">
 
           {/* THEME TOGGLE */}
           <button
             onClick={toggleTheme}
-            className="group flex items-center gap-2 rounded-full border border-transparent px-4 py-2 label-caps text-mute transition-colors hover:bg-carbon hover:text-ink"
+            className="group flex shrink-0 items-center gap-2 rounded-full border border-transparent px-2 py-2 label-caps text-mute transition-colors hover:bg-carbon hover:text-ink sm:px-4"
             title="Toggle dark mode"
           >
             {theme === 'dark' ? (
@@ -91,9 +91,10 @@ export default function LandingNav() {
           <Magnetic>
             <Link
               to="/app"
-              className="group flex items-center gap-2 rounded-full border border-carbon bg-void/60 px-5 py-2.5 label-caps backdrop-blur transition-colors hover:border-volt hover:bg-volt hover:text-on-volt"
+              className="group flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-carbon bg-void/60 px-3 py-2.5 label-caps backdrop-blur transition-colors hover:border-volt hover:bg-volt hover:text-on-volt sm:gap-2 sm:px-5"
             >
-              Open Glimpse
+              <span className="sm:hidden">Open</span>
+              <span className="hidden sm:inline">Open Glimpse</span>
 
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
             </Link>

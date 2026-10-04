@@ -32,6 +32,14 @@ const init = (project, dirty = false) => ({ present: project, past: [], future: 
 // so a whole drag becomes one logical history step once committed.
 const committed = (s) => (s.base ? { ...s, past: [...s.past, s.base].slice(-HISTORY_LIMIT), future: [], base: null } : s);
 
+/**
+ * @typedef {{ type: 'set', update: (project: any) => any, transient?: boolean }
+ *   | { type: 'commit' | 'undo' | 'redo' }
+ *   | { type: 'load', project: any, dirty?: boolean }
+ *   | { type: 'patch', patch: any, dirty?: boolean }} ProjectAction
+ */
+
+/** @param {ReturnType<typeof init>} state @param {ProjectAction} a */
 function reducer(state, a) {
   switch (a.type) {
     case 'set': {

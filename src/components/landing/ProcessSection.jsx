@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Image } from '@/components/ui/image';
 import Reveal from '@/components/fx/Reveal';
 
 const GEARS = '/Process.jpg';
@@ -72,10 +71,12 @@ export default function ProcessSection() {
               style={{ scale, rotate }}
               className="absolute inset-0"
             >
-              <Image
+              <img
                 src={GEARS}
                 alt="Glimpse QR creation process"
                 className="h-full w-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </motion.div>
 

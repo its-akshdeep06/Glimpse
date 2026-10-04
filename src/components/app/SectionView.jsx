@@ -12,7 +12,7 @@ export default function SectionView({ section, qr, deck, setDeck, actions, libra
         <LibrarySection
           index="02" title="Recents" meta={`${library.recents.length} / 20 slots`} items={library.recents} favoriteIds={favoriteIds}
           onOpen={onOpenProject} onToggleFavorite={actions.toggleFavorite} onDelete={(p) => onRemove('recents', p, 'Recent')}
-          emptyTitle="Nothing saved yet" emptyText="Save a code from the generator and it will live here — up to 20 projects." onCreate={onCreate}
+          emptyTitle="Nothing saved yet" emptyText="Save a code from the generator and it will live here - up to 20 projects." onCreate={onCreate}
         />
       );
     case 'templates':

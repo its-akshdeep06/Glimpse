@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import useQRProject, { hasContent } from '@/hooks/useQRProject';
 import useLibrary from '@/hooks/useLibrary';
 import useDraft from '@/hooks/useDraft';
 import useProjectActions from '@/hooks/useProjectActions';
-import useDynamicFavicon from '@/hooks/useDynamicFavicon';
 import { useToast } from '@/components/app/Toast';
 import { SECTIONS } from '@/lib/sections';
 import { getDraft, clearAllData } from '@/services/storageService';
@@ -34,6 +33,7 @@ export default function Workspace() {
   const library = useLibrary(reportError);
   const draft = useDraft(qr.project, qr.dirty, reportError);
   const [section, setSection] = useState(initialSection);
+  const mainRef = useRef(null);
   const [deck, setDeck] = useState('content');
   const [draftPrompt, setDraftPrompt] = useState(false);
   const [naming, setNaming] = useState(null);
@@ -43,8 +43,10 @@ export default function Workspace() {
   const actions = useProjectActions({ qr, library, toast, reportError, favoriteIds, discardDraft: draft.discard, openNaming: setNaming, openShareFallback: setShareFallback });
   const label = SECTIONS.find((s) => s.id === section).label;
 
-  useDynamicFavicon(section);
-  useEffect(() => { document.title = `${label} — Glimpse`; }, [label]);
+  useLayoutEffect(() => {
+    if (mainRef.current) mainRef.current.scrollTop = 0;
+  }, [section]);
+  useEffect(() => { document.title = `${label} - Glimpse`; }, [label]);
   useEffect(() => {
     if (section === 'create') getDraft().then((d) => d && setDraftPrompt(true)).catch(reportError);
   }, []);  
@@ -98,7 +100,7 @@ export default function Workspace() {
   return (
     <div className="h-screen overflow-hidden bg-void text-ink">
       <AppHeader section={section} onNavigate={openSection} />
-      <main className="h-[calc(100svh-4rem)] overflow-y-auto overscroll-contain">
+      <main ref={mainRef} className="h-[calc(100svh-4rem)] overflow-x-hidden overflow-y-auto overscroll-contain pb-24 lg:pb-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={section}

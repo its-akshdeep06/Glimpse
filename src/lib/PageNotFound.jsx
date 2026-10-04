@@ -24,7 +24,7 @@ export default function PageNotFound() {
         <p className="mt-10 font-wide text-[clamp(7rem,28vw,16rem)] font-black leading-[0.8] tracking-[-0.04em] text-outline">404</p>
         <h1 className="mt-4 font-wide text-2xl font-extrabold uppercase tracking-tight md:text-3xl">Signal lost</h1>
         <p className="mx-auto mt-4 max-w-md text-lg leading-relaxed text-mute">
-          The path <span className="font-mono text-ink">{path}</span> isn't part of this atelier. Every code here is encoded in your browser — this one just didn't resolve.
+          The path <span className="font-mono text-ink">{path}</span> isn't part of this atelier. Every code here is encoded in your browser - this one just didn't resolve.
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <Link to="/" className="inline-flex items-center gap-2 rounded-full border border-carbon px-5 py-3 label-caps transition-colors hover:border-ink">

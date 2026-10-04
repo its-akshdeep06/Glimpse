@@ -8,8 +8,8 @@ export default function AppHeader({ section, onNavigate }) {
   const idx = SECTIONS.findIndex((s) => s.id === section);
   return (
     <header className="sticky top-0 z-30 h-16 border-b border-carbon bg-void/80 backdrop-blur-xl">
-      <div className="flex h-full items-center justify-between px-5 md:px-8">
-        <Link to="/" className="flex items-center gap-3">
+      <div className="flex h-full items-center justify-between gap-3 px-4 sm:px-5 md:px-8">
+        <Link to="/" className="flex shrink-0 items-center gap-2.5">
           <LogoMark />
           <span className="font-wide font-extrabold tracking-tight">GLIMPSE</span>
         </Link>
@@ -21,10 +21,10 @@ export default function AppHeader({ section, onNavigate }) {
             </button>
           ))}
         </nav>
-        <div className="overflow-hidden label-caps text-mute">
+        <div className="min-w-0 overflow-hidden whitespace-nowrap text-right label-caps text-mute">
           <AnimatePresence mode="wait">
             <motion.span key={section} className="block tabular-nums" initial={{ y: 14, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -14, opacity: 0 }}>
-              {String(idx + 1).padStart(2, '0')} / 06<span className="lg:hidden"> — {SECTIONS[idx].label}</span>
+              {String(idx + 1).padStart(2, '0')} / 06<span className="hidden min-[360px]:inline lg:hidden"> - {SECTIONS[idx].label}</span>
             </motion.span>
           </AnimatePresence>
         </div>

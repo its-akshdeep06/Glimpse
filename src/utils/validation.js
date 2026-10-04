@@ -60,7 +60,7 @@ export function validateField(type, field, values) {
       return new TextEncoder().encode(v).length > 32 ? 'Network names are at most 32 bytes.' : null;
     case 'wifi.password': {
       const sec = values.security;
-      if (sec === 'nopass') return v ? "Open networks don't use a password — clear it or choose WPA/WEP." : null;
+      if (sec === 'nopass') return v ? "Open networks don't use a password - clear it or choose WPA/WEP." : null;
       if (!v) return 'This security type needs a password.';
       if (sec === 'WPA' && (v.length < 8 || v.length > 63)) return 'WPA passwords are 8–63 characters.';
       if (sec === 'WEP' && ![5, 13].includes(v.length) && !/^([0-9a-f]{10}|[0-9a-f]{26})$/i.test(v)) return 'WEP keys are 5 or 13 characters (or 10/26 hex digits).';
@@ -137,7 +137,7 @@ export function assessScanRisks(c) {
   const risks = [];
   const ratio = contrastRatio(c.foregroundColor, c.backgroundColor);
   if (ratio < 3) {
-    risks.push({ id: 'contrast', title: `Low contrast · ${ratio.toFixed(1)}:1`, tip: 'Darken the foreground or lighten the background — aim for at least 4:1.' });
+    risks.push({ id: 'contrast', title: `Low contrast · ${ratio.toFixed(1)}:1`, tip: 'Darken the foreground or lighten the background - aim for at least 4:1.' });
   }
   if (luminance(c.foregroundColor) > luminance(c.backgroundColor)) {
     risks.push({ id: 'inverted', title: 'Inverted colours', tip: 'Some older scanners struggle with light modules on a dark background. Dark-on-light is safest.' });
