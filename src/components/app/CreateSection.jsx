@@ -27,11 +27,6 @@ export default function CreateSection({ qr, deck, setDeck, actions, isFavorite, 
   const risks = useMemo(() => assessScanRisks(c), [c]);
 
   const scrollTo = (ref) => setTimeout(() => ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
-  const handleGenerate = () => {
-    const err = qr.generate();
-    if (err && err !== 'invalid') notify(err);
-    else if (!err && !isDesktop) scrollTo(previewRef);
-  };
   const editContent = () => { setDeck('content'); if (!isDesktop) scrollTo(formRef); };
   const customize = () => setDeck('customize');
   const closeCustomizer = () => { qr.commit(); setDeck('content'); };
@@ -41,7 +36,7 @@ export default function CreateSection({ qr, deck, setDeck, actions, isFavorite, 
   return (
     <div className="lg:flex lg:h-[calc(100svh-4rem)] lg:overflow-hidden">
       <aside ref={formRef} className="scroll-mt-16 border-b border-carbon lg:w-[420px] lg:shrink-0 lg:overflow-y-auto lg:border-b-0 lg:border-r">
-        <QRForm qr={qr} onGenerate={handleGenerate} />
+        <QRForm qr={qr} />
       </aside>
       <section ref={previewRef} className="scroll-mt-16 lg:flex-1 lg:overflow-hidden">
         <ErrorBoundary name="QRPreview">
