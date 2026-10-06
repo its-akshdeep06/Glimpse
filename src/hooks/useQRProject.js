@@ -32,6 +32,17 @@ const init = (project, dirty = false) => ({ present: project, past: [], future: 
 // so a whole drag becomes one logical history step once committed.
 const committed = (s) => (s.base ? { ...s, past: [...s.past, s.base].slice(-HISTORY_LIMIT), future: [], base: null } : s);
 
+const liveUrlPayload = (data, errorCorrection) => {
+  if (!validateType('url', data.url).valid) return '';
+  const payload = buildPayload('url', data.url);
+  try {
+    generateMatrix(payload, errorCorrection);
+    return payload;
+  } catch {
+    return '';
+  }
+};
+
 /**
  * @typedef {{ type: 'set', update: (project: any) => any, transient?: boolean }
  *   | { type: 'commit' | 'undo' | 'redo' }
@@ -83,10 +94,18 @@ export default function useQRProject() {
   const rename = useCallback((name) => dispatch({ type: 'patch', patch: { name }, dirty: true }), []);
   const markSaved = useCallback((patch = {}) => dispatch({ type: 'patch', patch, dirty: false }), []);
 
-  const setType = useCallback((type) => set((p) => ({ ...p, type }), true), [set]);
-  const updateField = useCallback((field, value) => set((p) => ({
-    ...p, data: { ...p.data, [p.type]: { ...p.data[p.type], [field]: value } },
-  }), true), [set]);
+  const setType = useCallback((type) => set((p) => {
+    const next = { ...p, type };
+    if (type !== 'url') return next;
+    const encoded = liveUrlPayload(p.data, p.customization.errorCorrection);
+    return { ...next, encoded, encodedType: encoded ? 'url' : null };
+  }, true), [set]);
+  const updateField = useCallback((field, value) => set((p) => {
+    const data = { ...p.data, [p.type]: { ...p.data[p.type], [field]: value } };
+    if (p.type !== 'url') return { ...p, data };
+    const encoded = liveUrlPayload(data, p.customization.errorCorrection);
+    return { ...p, data, encoded, encodedType: encoded ? 'url' : null };
+  }, true), [set]);
   const updateCustomization = useCallback((patch, transient = false) => set((p) => ({
     ...p, customization: { ...p.customization, ...patch },
   }), transient), [set]);

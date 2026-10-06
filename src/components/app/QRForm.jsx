@@ -21,7 +21,7 @@ export default function QRForm({ qr, onGenerate }) {
   };
   const submit = (e) => {
     e.preventDefault();
-    if (!disabled) onGenerate();
+    if (project.type !== 'url' && !disabled) onGenerate();
   };
   const label = project.encoded ? (upToDate ? 'QR is up to date' : 'Update QR') : 'Generate QR';
 
@@ -40,13 +40,15 @@ export default function QRForm({ qr, onGenerate }) {
           <TypeFields type={project.type} values={values} error={error} onChange={change} />
         </motion.div>
       </AnimatePresence>
-      <Magnetic strength={0.12} className="w-full">
-        <button type="submit" disabled={disabled} className="group relative flex w-full items-center justify-between overflow-hidden rounded-full bg-volt px-7 py-5 text-on-volt transition-colors disabled:cursor-not-allowed disabled:bg-carbon disabled:text-mute">
-          <span className="relative z-10 label-caps font-semibold">{label}</span>
-          {upToDate ? <Check className="relative z-10 h-5 w-5" /> : <ArrowRight className="relative z-10 h-5 w-5 transition-transform group-hover:translate-x-1" />}
-          {!disabled && <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/60 to-transparent group-hover:animate-[sheen_0.9s_ease]" />}
-        </button>
-      </Magnetic>
+      {project.type !== 'url' && (
+        <Magnetic strength={0.12} className="w-full">
+          <button type="submit" disabled={disabled} className="group relative flex w-full items-center justify-between overflow-hidden rounded-full bg-volt px-7 py-5 text-on-volt transition-colors disabled:cursor-not-allowed disabled:bg-carbon disabled:text-mute">
+            <span className="relative z-10 label-caps font-semibold">{label}</span>
+            {upToDate ? <Check className="relative z-10 h-5 w-5" /> : <ArrowRight className="relative z-10 h-5 w-5 transition-transform group-hover:translate-x-1" />}
+            {!disabled && <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/60 to-transparent group-hover:animate-[sheen_0.9s_ease]" />}
+          </button>
+        </Magnetic>
+      )}
     </form>
   );
 }
