@@ -122,4 +122,4 @@ npm run preview
 
 The included `vercel.json` configures Vercel to run `npm run build`, publish `dist/`, and rewrite requests to the SPA entry point so client-side routes work on direct navigation. Deploy the repository to Vercel and let it use the included configuration, or set the framework to Vite, the build command to `npm run build`, and the output directory to `dist/`.
 
-**Deployment URL:** [https://glimpse01.vercer.app](https://glimpse01.vercel.app)
+**Deployment URL:** [https://glimpse01.vercel.app](https://glimpse01.vercel.app)
