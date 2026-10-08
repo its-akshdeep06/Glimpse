@@ -4,7 +4,7 @@ Glimpse is a browser-based QR code studio for creating, customizing, and exporti
 
 ## Deployment
 
-[Open Glimpse](https://glimpse01.vercer.app)
+[Open Glimpse](https://glimpse01.vercel.app)
 
 The production site is hosted on Vercel. The Vercel configuration builds the Vite app into `dist/` and rewrites incoming paths to `index.html`, allowing client-side routes, including the not-found page, to load on direct visits and refreshes.
 
@@ -122,4 +122,4 @@ npm run preview
 
 The included `vercel.json` configures Vercel to run `npm run build`, publish `dist/`, and rewrite requests to the SPA entry point so client-side routes work on direct navigation. Deploy the repository to Vercel and let it use the included configuration, or set the framework to Vite, the build command to `npm run build`, and the output directory to `dist/`.
 
-**Deployment URL:** [https://glimpse01.vercer.app](https://glimpse01.vercer.app)
+**Deployment URL:** [https://glimpse01.vercer.app](https://glimpse01.vercel.app)
